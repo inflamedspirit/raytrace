@@ -1,0 +1,44 @@
+;; .emacs
+
+;;; uncomment this line to disable loading of "default.el" at startup
+;; (setq inhibit-default-init t)
+
+;; turn on font-lock mode
+(when (fboundp 'global-font-lock-mode)
+  (global-font-lock-mode t))
+
+;; enable visual feedback on selections
+;(setq transient-mark-mode t)
+
+;; default to better frame titles
+(setq frame-title-format
+      (concat  "%b - emacs@" system-name))
+
+;;Turn on Better Tex Mode
+;;(load "auctex.el" nil t t)
+;;(setq TeX-auto-save t)
+;;(setq TeX-parse-self t)
+
+;;Enable full screen shortcut
+(defun toggle-fullscreen ()
+  "Toggle full screen on X11"
+  (interactive)
+  (when (eq window-system 'x)
+    (set-frame-parameter
+     nil 'fullscreen
+     (when (not (frame-parameter nil 'fullscreen)) 'fullboth))))
+(global-set-key [f11] 'toggle-fullscreen)
+
+;;Fix the colors
+(invert-face 'default)
+(defun toggle-inversion ()
+  "Toggle color inversion"
+  (interactive)
+  (invert-face 'default)
+  )
+(global-set-key [f9] 'toggle-inversion)
+
+
+
+;;Increase font size
+(set-default 'preview-scale-function 1.5)
